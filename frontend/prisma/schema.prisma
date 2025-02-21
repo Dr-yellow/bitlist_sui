@@ -1,0 +1,41 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model ItemInfo {
+  id              String   @id @default(cuid())
+  itemId          Int
+  owner           String
+  title           String
+  baseAmount      BigInt
+  costAmount      BigInt
+  publicContent   String
+  privateContent  String
+  createdAt       BigInt
+  timestamp       DateTime @default(now())
+}
+
+model WithdrawalInfo {
+  id          String   @id @default(cuid())
+  amount      BigInt
+  recipient   String
+  timestamp   DateTime @default(now())
+}
+
+model PurchaseInfo {
+  id          String   @id @default(cuid())
+  itemId      Int
+  buyer       String
+  timestamp   DateTime @default(now())
+}
